@@ -16,6 +16,12 @@ class BooksApp extends React.Component {
     books: []
   }
 
+  componentDidMount(){
+    BooksAPI.getAll().then((books) => {
+      console.log(books)
+    })
+  }
+
   render() {
     return (
       <div className="app">
