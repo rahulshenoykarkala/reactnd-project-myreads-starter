@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-
 
 class Bookshelf extends Component {
     render(){
-        console.log(this.props)
         return(
             <div className="bookshelf" key={this.props.shelfCategory}>
                 <h2 className="bookshelf-title">{this.props.shelfTitle}</h2>
