@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
+
 class Bookshelf extends Component {
     render(){
         console.log(this.props)
         return(
-            <div className="bookshelf">
+            <div className="bookshelf" key={this.props.shelfCategory}>
                 <h2 className="bookshelf-title">{this.props.shelfTitle}</h2>
                 <div className="bookshelf-books">
                 <ol className="books-grid">
                     {
                         this.props.bookList.map((book) => (
-                            <li>
+                            <li key={book.id}>
                                 <div className="book">
                                     <div className="book-top">
                                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
@@ -26,7 +27,11 @@ class Bookshelf extends Component {
                                     </div>
                                     </div>
                                     <div className="book-title">{book.title}</div>
-                                    <div className="book-authors">Harper Lee</div>
+                                    <div className="book-authors">
+                                        {
+                                            book.authors.map((author, index)=>(<div key={index}>{author}</div>))
+                                        }
+                                    </div>
                                 </div>
                             </li>
                         ))

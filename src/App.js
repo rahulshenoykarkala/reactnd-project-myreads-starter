@@ -25,7 +25,7 @@ class BooksApp extends React.Component {
 
   getObjByAttribute(set, attr_name, value){
     if(set.length)
-      return set.filter((obj) => obj[attr_name] == value)
+      return set.filter((obj) => obj[attr_name] === value)
     return []
   }
 
@@ -41,9 +41,9 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <Bookshelf shelfTitle="Currently Reading" bookList={this.getObjByAttribute(this.state.books, "shelf", "currentlyReading")}/>
-                <Bookshelf shelfTitle="Want to Read" bookList={this.getObjByAttribute(this.state.books, "shelf", "wantToRead")}/>
-                <Bookshelf shelfTitle="Read" bookList={this.getObjByAttribute(this.state.books, "shelf", "read")}/>
+                <Bookshelf shelfTitle="Currently Reading" bookList={this.getObjByAttribute(this.state.books, "shelf", "currentlyReading")} shelfCategory="currentlyReading"/>
+                <Bookshelf shelfTitle="Want to Read" bookList={this.getObjByAttribute(this.state.books, "shelf", "wantToRead")} shelfCategory="wantToRead"/>
+                <Bookshelf shelfTitle="Read" bookList={this.getObjByAttribute(this.state.books, "shelf", "read")} shelfCategory="read"/>
               </div>
             </div>
             <div className="open-search">
