@@ -23,10 +23,24 @@ class BooksApp extends React.Component {
     })
   }
 
-  getObjByAttribute(set, attr_name, value){
+  getObjByAttribute = (set, attr_name, value) =>{
     if(set.length)
       return set.filter((obj) => obj[attr_name] === value)
     return []
+  }
+
+  update = (select) => {
+    let book = this.getObjByAttribute(this.state.books, "id", select.id)[0]
+    let shelf = select.options[select.selectedIndex].value;
+    BooksAPI.update(this.getObjByAttribute(this.state.books, "id", book.id)[0], shelf)
+    .then(() => 
+      {this.setState({ books: this.state.books.map(( bookInShelf ) => {
+        if(bookInShelf.id === book.id){
+          bookInShelf.shelf = shelf;
+        }
+        return bookInShelf;
+      })})
+    })
   }
 
   render() {
@@ -41,9 +55,9 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <Bookshelf shelfTitle="Currently Reading" bookList={this.getObjByAttribute(this.state.books, "shelf", "currentlyReading")} shelfCategory="currentlyReading"/>
-                <Bookshelf shelfTitle="Want to Read" bookList={this.getObjByAttribute(this.state.books, "shelf", "wantToRead")} shelfCategory="wantToRead"/>
-                <Bookshelf shelfTitle="Read" bookList={this.getObjByAttribute(this.state.books, "shelf", "read")} shelfCategory="read"/>
+                <Bookshelf shelfTitle="Currently Reading" bookList={this.getObjByAttribute(this.state.books, "shelf", "currentlyReading")} shelfCategory="currentlyReading" updateBookStatus={this.update}/>
+                <Bookshelf shelfTitle="Want to Read" bookList={this.getObjByAttribute(this.state.books, "shelf", "wantToRead")} shelfCategory="wantToRead" updateBookStatus={this.update}/>
+                <Bookshelf shelfTitle="Read" bookList={this.getObjByAttribute(this.state.books, "shelf", "read")} shelfCategory="read" updateBookStatus={this.update}/>
               </div>
             </div>
             <div className="open-search">
