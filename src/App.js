@@ -18,8 +18,15 @@ class BooksApp extends React.Component {
 
   componentDidMount(){
     BooksAPI.getAll().then((books) => {
+      this.setState({books})
       console.log(books)
     })
+  }
+
+  getObjByAttribute(set, attr_name, value){
+    if(set.length)
+      return set.filter((obj) => obj[attr_name] == value)
+    return []
   }
 
   render() {
@@ -34,9 +41,9 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <Bookshelf shelfTitle="Currently Reading"/>
-                <Bookshelf shelfTitle="Want to Read"/>
-                <Bookshelf shelfTitle="Read"/>
+                <Bookshelf shelfTitle="Currently Reading" bookList={this.getObjByAttribute(this.state.books, "shelf", "currentlyReading")}/>
+                <Bookshelf shelfTitle="Want to Read" bookList={this.getObjByAttribute(this.state.books, "shelf", "wantToRead")}/>
+                <Bookshelf shelfTitle="Read" bookList={this.getObjByAttribute(this.state.books, "shelf", "read")}/>
               </div>
             </div>
             <div className="open-search">
