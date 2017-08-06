@@ -3,7 +3,7 @@ import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Search from './Search.js'
 import Bookshelf from './Bookshelf.js'
-import { Route } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'
 
 class BooksApp extends React.Component {
   state = {
@@ -44,6 +44,7 @@ class BooksApp extends React.Component {
 
   add = (book, shelf) =>{
     book.shelf = shelf;
+    console.log(book)
     BooksAPI.update(book, shelf)
     .then(book => 
       {this.setState({ books: this.state.books.concat([book])})
@@ -69,7 +70,7 @@ class BooksApp extends React.Component {
               </div>
             </div>
             <div className="open-search">
-              <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+              <Link to="/search">Add a book</Link>
             </div>
           </div>
         )} />
