@@ -29,10 +29,8 @@ class BooksApp extends React.Component {
     return []
   }
 
-  update = (select) => {
-    let book = this.getObjByAttribute(this.state.books, "id", select.id)[0]
-    let shelf = select.options[select.selectedIndex].value;
-    BooksAPI.update(this.getObjByAttribute(this.state.books, "id", book.id)[0], shelf)
+  update = (book, shelf) => {    
+    BooksAPI.update(book, shelf)
     .then(() => 
       {this.setState({ books: this.state.books.map(( bookInShelf ) => {
         if(bookInShelf.id === book.id){
@@ -43,11 +41,19 @@ class BooksApp extends React.Component {
     })
   }
 
+  add = (book, shelf) =>{
+    book.shelf = shelf;
+    BooksAPI.update(book, shelf)
+    .then(book => 
+      {this.setState({ books: this.state.books.concat([book])})
+    })
+  }
+
   render() {
     return (
       <div className="app">
         {this.state.showSearchPage ? (
-          <Search/>
+          <Search addBook={this.add}/>
         ) : (
           <div className="list-books">
             <div className="list-books-title">
