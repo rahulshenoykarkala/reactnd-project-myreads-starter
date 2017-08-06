@@ -1,16 +1,21 @@
 import React, { Component } from 'react'
 
 class Book extends Component {
+    state={
+        shelf: this.props.book.shelf
+    }
     render(){
         const { book, updateBookStatus } = this.props;
+        //console.log(book)
         return (
             <div className="book">
                 <div className="book-top">
                 <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                 <div className="book-shelf-changer">
                     <select value={book.shelf} id={book.id} onChange={(e) => {
-                            console.log(book)
-                            updateBookStatus(book, e.target.options[e.target.selectedIndex].value)
+                            let shelf = e.target.options[e.target.selectedIndex].value;
+                            this.setState({shelf})
+                            updateBookStatus(book, shelf)
                         }}>
                     <option value="none" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>

@@ -10,7 +10,19 @@ class Search extends Component {
     }
 
     search(value){
-        BooksAPI.search(value,10).then(books => this.setState({books}))
+        BooksAPI.search(value,10).then((books) => {
+            if(books.length){
+                let booksNew = books.map(( book ) => {
+                    book.shelf = "none"
+                    let shelfBook = this.props.books.filter((shelfBook) => book.id === shelfBook.id)
+                    if(shelfBook.length){
+                        return shelfBook[0]
+                    }
+                    return book
+                })
+                this.setState({books: booksNew})
+            }
+        })
     }
 
     render(){
@@ -29,8 +41,9 @@ class Search extends Component {
                     */}
                     <input type="text" placeholder="Search by title or author"
                     value={this.state.query} onChange={(event)=>{
-                        this.setState({query:event.target.value})
-                        this.search(event.target.value)
+                        var query = event.target.value;
+                        this.setState({query})
+                        if(query) this.search(query)
                     }}/>
                     
                 </div>
