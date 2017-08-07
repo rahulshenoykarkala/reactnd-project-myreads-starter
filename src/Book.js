@@ -6,7 +6,6 @@ class Book extends Component {
     }
     render(){
         const { book, updateBookStatus } = this.props;
-        //console.log(book)
         return (
             <div className="book">
                 <div className="book-top">
