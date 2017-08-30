@@ -1,4 +1,4 @@
-Bookshelf is a react app runs on node. You need a node server to run this application. If you don't have node, please visit [node.Js downloads](https://nodejs.org/en/download/)page.
+Bookshelf is a react app runs on node. You need a node server to run this application. If you don't have node, please visit [node.Js downloads](https://nodejs.org/en/download/) page.
 
 
  Installing book shelf -
