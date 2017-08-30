@@ -6,6 +6,6 @@ Bookshelf is a react app runs on node. You need a node server to run this applic
 ```
 git clone https://github.com/rahulshenoykarkala/reactnd-project-myreads-starter
 cd reactnd-project-myreads-starter
-nm init
+npm init
 npm start
 ```
